@@ -1,0 +1,80 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  username  String
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  boards    Board[]
+}
+
+model Board {
+  id             Int       @id @default(autoincrement())
+  title          String
+  createdAt      DateTime  @default(now())
+  userId         Int
+  description    String?
+  endDate        DateTime?
+  startDate      DateTime?
+  completionRate Int       @default(0)
+  /// calculé par le backend
+  isCompleted    Boolean   @default(false)
+  user           User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  columns        Column[]
+}
+
+model Column {
+  id       Int    @id @default(autoincrement())
+  title    String
+  position Int
+  boardId  Int
+  board    Board  @relation(fields: [boardId], references: [id], onDelete: Cascade)
+  tasks    Task[]
+}
+
+model Task {
+  id                 Int       @id @default(autoincrement())
+  title              String
+  description        String?
+  status             String
+  dueDate            DateTime?
+  priority           String?
+  columnId           Int
+  acceptanceCriteria String?
+  businessValue      String?
+  code               String?
+  position           Int       @default(0)
+  dod                DoD?
+  dor                DoR?
+  column             Column    @relation(fields: [columnId], references: [id], onDelete: Cascade)
+}
+
+model DoR {
+  id                        Int     @id @default(autoincrement())
+  taskId                    Int     @unique
+  storyDefined              Boolean @default(false)
+  descriptionDefined        Boolean @default(false)
+  acceptanceCriteriaDefined Boolean @default(false)
+  priorityDefined           Boolean @default(false)
+  estimated                 Boolean @default(false)
+  task                      Task    @relation(fields: [taskId], references: [id], onDelete: Cascade)
+}
+
+model DoD {
+  id                   Int     @id @default(autoincrement())
+  taskId               Int     @unique
+  developmentCompleted Boolean @default(false)
+  acceptanceValidated  Boolean @default(false)
+  testsPassed          Boolean @default(false)
+  codeReviewed         Boolean @default(false)
+  documentationUpdated Boolean @default(false)
+  task                 Task    @relation(fields: [taskId], references: [id], onDelete: Cascade)
+}

@@ -1,0 +1,5 @@
+DB_NAME= taskflow
+DB_USER= postgres
+DB_PASSWORD= root
+DB_HOST= localhost
+DB_Port= 5432

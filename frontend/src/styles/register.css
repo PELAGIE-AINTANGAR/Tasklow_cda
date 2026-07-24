@@ -1,0 +1,31 @@
+.register-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #f5f5f5;
+}
+
+.register-card {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  width: 350px;
+}
+
+.register-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.error-message{
+
+    color:#d62828;
+
+    margin:10px 0;
+
+    font-size:14px;
+
+    font-weight:600;
+
+}
