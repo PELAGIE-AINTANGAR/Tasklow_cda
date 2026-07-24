@@ -23,11 +23,11 @@
     "express-validator": "^7.3.2",
     "jsonwebtoken": "^9.0.3",
     "pg": "^8.20.0",
-    "prisma": "^6.19.3",
     "sequelize": "^6.37.8"
   },
   "devDependencies": {
     "jest": "^30.4.2",
-    "nodemon": "^3.1.14"
+    "nodemon": "^3.1.14",
+    "prisma": "^6.19.3"
   }
 }
