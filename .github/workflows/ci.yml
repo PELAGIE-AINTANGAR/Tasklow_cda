@@ -47,10 +47,17 @@ jobs:
 
       - name: Generate Prisma Client
         run: npx prisma generate
-        
+
       - name: Validate Prisma schema
         run: npx prisma validate
 
+      - name: Debug Prisma
+        run: |
+          ls -la node_modules/.bin
+          ls -la node_modules/prisma
+          ls -la node_modules/@prisma
+          npx prisma --version
+          
       - name: Run Backend Tests
         run: npm test -- --runInBand
         continue-on-error: true
