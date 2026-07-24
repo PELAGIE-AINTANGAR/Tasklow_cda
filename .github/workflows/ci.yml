@@ -47,14 +47,31 @@ jobs:
 
       - name: Debug Prisma
         run: |
-          ls -la node_modules/.bin
-          ls -la node_modules/prisma
-          ls -la node_modules/@prisma
-          npx prisma --version
+          echo "Node : $(node -v)"
+          echo "NPM : $(npm -v)"
+
+          which node
+          which npm
+
+          ls -l node_modules/.bin/prisma
+
+          file node_modules/.bin/prisma
+
+          cat node_modules/.bin/prisma
+
+          chmod +x node_modules/.bin/prisma
+
+          echo "Après chmod"
+
+          ls -l node_modules/.bin/prisma
+
+          ./node_modules/.bin/prisma --version || true
+
+          node node_modules/prisma/build/index.js --version || true
 
       - name: Fix Prisma permissions
         run: chmod +x node_modules/.bin/prisma
-        
+
       - name: Generate Prisma Client
         run: npx prisma generate
 
