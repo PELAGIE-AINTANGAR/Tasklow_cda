@@ -38,18 +38,12 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
           cache: npm
           cache-dependency-path: backend/package-lock.json
 
       - name: Install dependencies
         run: npm install
-
-      - name: Generate Prisma Client
-        run: npx prisma generate
-
-      - name: Validate Prisma schema
-        run: npx prisma validate
 
       - name: Debug Prisma
         run: |
@@ -57,7 +51,13 @@ jobs:
           ls -la node_modules/prisma
           ls -la node_modules/@prisma
           npx prisma --version
-          
+
+      - name: Generate Prisma Client
+        run: npx prisma generate
+
+      - name: Validate Prisma schema
+        run: npx prisma validate
+
       - name: Run Backend Tests
         run: npm test -- --runInBand
         continue-on-error: true
