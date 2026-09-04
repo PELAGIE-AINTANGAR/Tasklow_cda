@@ -6,10 +6,11 @@ describe("boardService", () => {
   });
   describe("createBoard", () => {
     it("should create a new board", async () => {
-      const board = await boardService.createBoard({
-        title: "Test Board",
-        description: "Test Board Description"
-      });
+      const board = await boardService.createBoard(
+        {title: "Test Board",
+        description: "Test Board Description"},
+        user.id
+      );
       expect(board).toHaveProperty("id");
       expect(board.title).toBe("Test Board");
       expect(board.description).toBe("Test Board Description");
