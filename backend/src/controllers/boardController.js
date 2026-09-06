@@ -1,6 +1,6 @@
 const boardService = require("../services/boardService");
 
-const getBoards = async (req, res, next) => {
+const getBoards = async (req, res) => {
   try {
     const boards = await boardService.getBoards(req.user.id);
 
@@ -17,7 +17,7 @@ const getBoards = async (req, res, next) => {
   }
 };
 
-const createBoard = async (req, res, next) => {
+const createBoard = async (req, res) => {
   try {
     const board = await boardService.createBoard(
       req.body,

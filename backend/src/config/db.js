@@ -1,5 +1,4 @@
-import { Sequelize } from '@sequelize/core';
-
+const { Sequelize } = require('@sequelize/core');
 const sequelize = new Sequelize(
   process.env.DB_NAME,
   process.env.DB_USER,

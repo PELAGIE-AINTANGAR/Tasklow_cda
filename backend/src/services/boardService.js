@@ -214,7 +214,7 @@ const updateBoardCompletion = async (boardId) => {
 
       throw new Error("Board not found");
 
-    };
+    }
 
     const tasks = board.columns.flatMap(column => column.tasks);
 

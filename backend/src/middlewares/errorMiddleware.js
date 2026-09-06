@@ -11,8 +11,7 @@
 const errorMiddleware = (
   error,
   req,
-  res,
-  next
+  res
 ) => {
 
   console.error(error);
