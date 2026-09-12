@@ -263,4 +263,18 @@ jobs:
       - name: Verify deployment
         run: |
           kubectl get pods
-          kubectl get services
+          kubectl get service
+
+  google-chat-test:
+    name: Google Chat Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Send test message
+        env:
+          GOOGLE_CHAT_WEBHOOK: ${{ secrets.GOOGLE_CHAT_WEBHOOK }}
+        run: |
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            -d '{"text":"🚀 Test Google Chat depuis la pipeline TaskFlow !"}' \
+            "$GOOGLE_CHAT_WEBHOOK"
