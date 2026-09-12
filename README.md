@@ -8,24 +8,24 @@ Le projet intègre également une chaîne CI/CD complète permettant de tester, 
 
 # Fonctionnalités
 
-- 🔐 Authentification sécurisée (JWT)
-- 👤 Gestion des utilisateurs
-- 📁 Gestion des projets (Boards)
-- 📌 Gestion des colonnes Kanban
-- 📝 Gestion des User Stories
-- ✅ Définition of Ready (DoR)
-- 🎯 Définition of Done (DoD)
-- 📊 Tableau de bord Analytics
-- 📈 Progression automatique des User Stories
-- 🐳 Déploiement avec Docker
-- ✔️ Tests unitaires avec Jest
-- 🔍 Analyse de sécurité du code avec CodeQL
-- 🔄 Intégration Continue avec GitHub Actions
-- 📦 Publication des images Docker sur GitHub Container Registry (GHCR)
-- ☸️ Déploiement automatique sur Kubernetes
-- 🌐 Exposition de l'application avec Kubernetes Ingress
-- 💾 Stockage persistant PostgreSQL avec PersistentVolumeClaim
-- 💬 Notifications de pipeline avec Google Chat
+- Authentification sécurisée (JWT)
+- Gestion des utilisateurs
+- Gestion des projets (Boards)
+- Gestion des colonnes Kanban
+- Gestion des User Stories
+- Définition of Ready (DoR)
+- Définition of Done (DoD)
+- Tableau de bord Analytics
+- Progression automatique des User Stories
+- Déploiement avec Docker
+- Tests unitaires avec Jest
+- Analyse de sécurité du code avec CodeQL
+- Intégration Continue avec GitHub Actions
+- Publication des images Docker sur GitHub Container Registry (GHCR)
+- Déploiement automatique sur Kubernetes
+- Exposition de l'application avec Kubernetes Ingress
+- Stockage persistant PostgreSQL avec PersistentVolumeClaim
+- Notifications de pipeline avec Google Chat
 ---
 
 # Architecture de l'application
@@ -56,7 +56,7 @@ Le projet intègre également une chaîne CI/CD complète permettant de tester, 
               │ Persistent Storage  │
               └─────────────────────┘
 ```
-Architecture CI/CD
+# Architecture CI/CD
 
 Le projet utilise GitHub Actions pour automatiser l'intégration et le déploiement de l'application.
 
@@ -120,7 +120,7 @@ ghcr.io/pelagie-aintangar/taskflow-frontend:v1.0.0
 ---
 
 
-# 🛠️ Technologies
+# Technologies
 
 ## Frontend
 
@@ -271,7 +271,7 @@ npm start
 
 ---
 
-# 🧪 Tests
+# Tests
 
 Les tests unitaires du backend sont réalisés avec Jest.
 
@@ -330,20 +330,20 @@ La pipeline est déclenchée lors des événements Git configurés, notamment lo
 
 Elle réalise les étapes suivantes :
 
-📥 Récupération du code avec actions/checkout
-⚙️ Installation de Node.js
-📦 Installation des dépendances
-🗄️ Validation et migration de la base de données
-🧪 Exécution des tests backend avec Jest
-🏗️ Build du frontend React
-🔍 Analyse de sécurité avec CodeQL
-🐳 Construction des images Docker
-📦 Publication des images sur GHCR
-☸️ Connexion au cluster Kubernetes
-🔄 Mise à jour des images utilisées par les Deployments
-⏳ Vérification du déploiement avec kubectl rollout status
-🔎 Vérification des Pods et Services
-💬 Envoi d'une notification dans Google Chat
+Récupération du code avec actions/checkout
+Installation de Node.js
+Installation des dépendances
+Validation et migration de la base de données
+Exécution des tests backend avec Jest
+Build du frontend React
+Analyse de sécurité avec CodeQL
+Construction des images Docker
+Publication des images sur GHCR
+Connexion au cluster Kubernetes
+Mise à jour des images utilisées par les Deployments
+Vérification du déploiement avec kubectl rollout status
+Vérification des Pods et Services
+Envoi d'une notification dans Google Chat
 ---
 
 # Docker
@@ -493,7 +493,7 @@ la branche ou le tag
 
 Exemple :
 
-🚀 TaskFlow CI/CD
+TaskFlow CI/CD
 
 Statut : ✅ SUCCESS
 Commit : a0b4fadc...
@@ -523,7 +523,7 @@ GOOGLE_CHAT_WEBHOOK
 
 Les secrets ne sont pas directement écrits dans le workflow.
 
-📋 Pipeline complète
+Pipeline complète
                     Git Push / Git Tag
                             │
                             ▼
