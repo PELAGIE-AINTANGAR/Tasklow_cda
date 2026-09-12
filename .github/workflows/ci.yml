@@ -265,16 +265,42 @@ jobs:
           kubectl get pods
           kubectl get service
 
-  google-chat-test:
-    name: Google Chat Test
+  google-chat:
+    name: Google Chat Notification
     runs-on: ubuntu-latest
+    needs:
+      - backend
+      - frontend
+      - security
+      - docker
+      - deploy
+    
+    if: always()
 
     steps:
-      - name: Send test message
+      - name: Determine pipeline status
+        run: |
+          if [ "${{ needs.backend.result }}" = "success" ] && \
+             [ "${{ needs.frontend.result }}" = "success" ] && \
+             [ "${{ needs.security.result }}" = "success" ] && \
+             [ "${{ needs.docker.result }}" = "success" ] && \
+             [ "${{ needs.deploy.result }}" = "success" ]; then
+            echo "STATUS=✅ SUCCESS" >> "$GITHUB_ENV"
+          else
+            echo "STATUS=❌ FAILURE" >> "$GITHUB_ENV"
+          fi
+
+      - name: Send notification to Google Chat
         env:
           GOOGLE_CHAT_WEBHOOK: ${{ secrets.GOOGLE_CHAT_WEBHOOK }}
         run: |
+          MESSAGE="🚀 TaskFlow CI/CD
+
+          Statut : $STATUS
+          Commit : ${{ github.sha }}
+          Branche/Tag : ${{ github.ref_name }}"
+
           curl -X POST \
             -H "Content-Type: application/json" \
-            -d '{"text":"🚀 Test Google Chat depuis la pipeline TaskFlow !"}' \
+            -d "{\"text\":\"${MESSAGE}\"}" \
             "$GOOGLE_CHAT_WEBHOOK"
