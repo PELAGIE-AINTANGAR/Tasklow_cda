@@ -36,7 +36,7 @@ jobs:
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: taskflow
+          POSTGRES_DB: pp
 
         ports:
           - 5432:5432
