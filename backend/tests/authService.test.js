@@ -71,7 +71,7 @@ describe("Auth Service", () => {
         }
       });
 
-      expect("").toBe(userData.email);
+      expect(result.email).toBe(userData.email);
 
     });
 
