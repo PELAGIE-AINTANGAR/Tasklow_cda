@@ -7,6 +7,7 @@ const columnRoutes = require("./routes/columnRoutes");
 const taskRoutes = require("./routes/taskRoutes");
 const dorRoutes = require("./routes/dorRoutes");
 const dodRoutes = require("./routes/dodRoutes");
+const aiRoutes = require("./routes/ai.routes");
 
 const errorMiddleware = require("./middlewares/errorMiddleware");
 const analyticRoutes = require("./routes/analyticRoutes");
@@ -27,7 +28,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/boards", boardRoutes);
 app.use("/api/columns", columnRoutes);
 app.use("/api/tasks", taskRoutes);
-
+app.use("/api/ai", aiRoutes);
 app.use(
   "/api/analytics",
   analyticRoutes

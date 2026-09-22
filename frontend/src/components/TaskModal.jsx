@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-
+import { analyzeUserStory } from "../services/aiService";
+import AIAssistant from "./AIAssistant";
 export default function TaskModal({
 
   isOpen,
@@ -29,6 +30,15 @@ export default function TaskModal({
   const [dueDate, setDueDate] =
     useState("");
 
+  const [aiResult, setAiResult] =
+    useState(null);
+
+  const [aiLoading, setAiLoading] =
+    useState(false);
+
+  const [aiError, setAiError] =
+    useState("");
+
   const resetForm = () => {
     setCode("");
 
@@ -42,12 +52,17 @@ export default function TaskModal({
     setPriority("Medium");
 
     setDueDate("");
+    
+    setAiResult(null);
+    setAiLoading(false);
 
   };
 
   useEffect(() => {
 
     if (!isOpen) return;
+    setAiResult(null);
+    setAiError("");
 
     if (task) {
 
@@ -80,6 +95,94 @@ export default function TaskModal({
   }, [task, isOpen]);
 
   if (!isOpen) return null;
+
+  const handleAIAnalysis = async () => {
+    if (!title.trim()) {
+      alert(
+        "Veuillez renseigner le titre de la User Story avant l'analyse."
+      );
+
+      return;
+    }
+
+    setAiLoading(true);
+    setAiError("");
+    setAiResult(null);
+
+    try {
+      const result =
+        await analyzeUserStory({
+          title,
+          description,
+          businessValue,
+          acceptanceCriteria,
+          priority,
+        });
+
+      console.log(
+        "🤖 Résultat IA :",
+        result
+      );
+
+      setAiResult(result);
+
+    } catch (error) {
+      console.error(
+        "❌ Erreur analyse IA :",
+        error
+      );
+
+      setAiError(
+        error.message ||
+          "Impossible d'analyser la User Story."
+      );
+
+    } finally {
+      setAiLoading(false);
+    }
+  };
+
+  // =========================
+  // UTILISER LA PROPOSITION IA
+  // =========================
+
+  const handleApplyAI = () => {
+    if (!aiResult?.improvedUserStory) {
+      return;
+    }
+
+    const improved =
+      aiResult.improvedUserStory;
+
+    setTitle(
+      improved.title || title
+    );
+
+    setDescription(
+      improved.description || description
+    );
+
+    setBusinessValue(
+      improved.businessValue ||
+        businessValue
+    );
+
+    if (
+      Array.isArray(
+        improved.acceptanceCriteria
+      )
+    ) {
+      setAcceptanceCriteria(
+        improved.acceptanceCriteria.join("\n")
+      );
+    }
+
+    // On ferme le résultat IA
+    // après application
+    setAiResult(null);
+
+    setAiError("");
+  };
 
   const handleSubmit = async () => {
 
@@ -287,6 +390,18 @@ export default function TaskModal({
           }
 
         />
+        {/* ========================= */}
+        {/* ASSISTANT IA */}
+        {/* ========================= */}
+
+        <AIAssistant
+          result={aiResult}
+          loading={aiLoading}
+          error={aiError}
+          onAnalyze={handleAIAnalysis}
+          onApply={handleApplyAI}
+        />
+
 
         <div className="modal-buttons">
 
